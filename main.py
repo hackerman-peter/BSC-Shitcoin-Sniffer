@@ -38,10 +38,22 @@ for contract in coins:
     browser.execute_script('window.open("' + coins[contract][2] + '","_blank");')
     linkCount += 1
 
-
+# Transfers
 for i in range(1, linkCount):
     browser.switch_to.window(browser.window_handles[i])
+    print("Currently on: " + browser.title)
 
+    # Get the tokens list iframe and switch to it
+    iframe = browser.find_element_by_xpath('//*[@id="tokentxnsiframe"]')
+    browser.switch_to.frame(iframe)
+
+    # Now you can go through each transfer directly
+    for transferNum in range(1, 10+1):
+        transfer = browser.find_element_by_xpath(f'//*[@id="maindiv"]/div[2]/table/tbody/tr[{transferNum}]/td[3]/span')
+        print(transfer.text)
+
+    """
+    # Just commenting this code out temporarily
     holders = browser.find_element_by_xpath('//*[@id="ContentPlaceHolder1_tr_tokenHolders"]/div/div[2]/div/div')
 
     transfersTab = browser.find_element_by_xpath('//*[@id="li_transactions"]/a')
@@ -54,6 +66,6 @@ for i in range(1, linkCount):
         print(transfer.text)
         transfer = transfer.text.replace(' ago', '')
         print(transfer)
-
+    """
 
 
