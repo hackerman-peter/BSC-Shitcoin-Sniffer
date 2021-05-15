@@ -88,12 +88,20 @@ for i in range(1, linkCount):
     except:
         print('first page is also the last page')
 
+    # After the last button is clicked, there is a delay before it actually
+    # loads up the last page of transfers. 
+    #
+    # You can either use the hacky method of time.sleep(1) (which is not 
+    # ideal), or you switch back to the parent iframe, then re-switch into the 
+    # tokentxnsiframe. This will cause it to wait for the new iframe to load 
+    # again. I'm using the second method here
+    browser.switch_to.default_content()
+    browser.switch_to.frame(iframe)
+
     # Getting the length of transactions on the last page
     lastTransactionPageRowLength = len(browser.find_elements_by_xpath('//*[@id="maindiv"]/div[2]/table/tbody/tr'))
-    print(lastTransactionPageRowLength)
 
-    lastTransaction = browser.find_element_by_xpath(f'//*[@id="maindiv"]/div[2]/table/tbody/tr[{lastTransactionPageRowLength - 1}]/span')
+    # Don't do `lastTransactionPageRowLength - 1`, the rows are indexed
+    # starting from 1
+    lastTransaction = browser.find_element_by_xpath(f'//*[@id="maindiv"]/div[2]/table/tbody/tr[{lastTransactionPageRowLength}]/td[3]/span')
     print(lastTransaction.text)
-
-
-
