@@ -10,10 +10,10 @@ browser.maximize_window()
 
 browser.get('https://bscscan.com/tokentxns')
 
-pages = 2
+pages = 5
 
 now = datetime.now()
-current_time = now.strftime("|%H:%M")
+current_time = now.strftime(" | %H:%M")
 
 csvFileName = str(date.today()) + str(current_time) + '.csv'
 file = open(csvFileName, "w")

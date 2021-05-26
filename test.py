@@ -1,3 +1,8 @@
-str = '123 sav'
+from datetime import datetime, date
 
-print(str.split()[0])
+now = datetime.now()
+current_time = now.strftime("|%H:%M")
+
+csvFileName = str(date.today()) + str(current_time) + '.csv'
+
+print(csvFileName)
