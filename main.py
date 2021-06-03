@@ -70,6 +70,12 @@ for page in range(1, pages + 1):
 
         print("Currently on: " + browser.title)
 
+        supply = browser.find_element_by_xpath('//*[@id="ContentPlaceHolder1_divSummary"]/div[1]/div[1]/div/div[2]/div[2]/div[2]/span[1]').text
+        
+        if supply == '0':
+            browser.close()
+            continue
+
         numOfHolders = browser.find_element_by_xpath(
             '//*[@id="ContentPlaceHolder1_tr_tokenHolders"]/div/div[2]/div/div').text
 
